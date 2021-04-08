@@ -1,4 +1,17 @@
 # save integration
-GET {{baseUrl}}/api/integration?code=code-1
+GET {{baseUrl}}/api/integration?code=code-1&configurationId=configuration-id-1&next={{baseUrl}}
 
 ###
+
+#### vercel
+
+# vercel auth
+POST {{vercelApi}}/v2/oauth/access_token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=oac_wTw6UD7J4NGCcYczuiguBsRg&client_secret=TvyPYJDY02jethhFhCzim8RL&code=60rlqQuAstnkJPioGGcoYXjv&redirect_uri=http://localhost:3000/api/integration
+
+###
+
+GET {{vercelApi}}/v4/projects/
+Authorization: Bearer KQVEPH0HbWD5dkLlmsDxyvwy

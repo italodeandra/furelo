@@ -1,7 +1,8 @@
-import { connectDb, cors, runMiddleware } from "next-library"
+import { badRequest, conflict, connectDb, cors, runMiddleware } from "next-library"
 import config from "../../config"
 import { NextApiRequest, NextApiResponse } from "next"
-import Integration from "../../models/message"
+import Integration from "../../models/integration"
+import nookies from 'nookies'
 
 const integration = async (req: NextApiRequest, res: NextApiResponse) => {
   await runMiddleware(req, res, cors(), connectDb(config.databaseUrl))
@@ -13,10 +14,16 @@ const integration = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (!code || !configurationId || !next) {
-    return res.status(400).send("Bad Request")
+    return badRequest(res)
+  }
+
+  if (await Integration.countDocuments({ code, configurationId }) > 0) {
+    return conflict(res)
   }
 
   const integrationDoc = new Integration({ code, configurationId })
+
+  nookies.set
 
   await integrationDoc.save()
 
