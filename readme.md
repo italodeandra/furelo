@@ -1,3 +1,5 @@
+> This repository is archived in favor of LogDNA
+
 <img src="hero.png" alt="Furelo">
 <br />
 <br />
